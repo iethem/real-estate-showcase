@@ -1,0 +1,27 @@
+@import "./colors";
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border-bottom: 1px solid $gray;
+  text-align: center;
+  padding: 4px;
+}
+
+th {
+  color: $blue;
+}
+
+tr:nth-child(even) {
+  background-color: $light-gray;
+}
+
+tbody tr:hover {
+  background: $gray;
+  outline: none;
+  cursor: pointer;
+}

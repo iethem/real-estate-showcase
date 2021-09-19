@@ -1,0 +1,25 @@
+@import "./colors";
+
+.pagination {
+  margin: 20px 0;
+  text-align: center;
+
+  div {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 8px 16px;
+    color: $black;
+    text-decoration: none;
+
+    &:hover {
+      &:not(.active) {
+        background-color: $light-gray;
+      }
+    }
+  }
+
+  div.active {
+    background-color: $blue;
+    color: white;
+  }
+}

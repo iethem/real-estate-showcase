@@ -1,0 +1,1 @@
+export const API_PROPERTY = process.env.NODE_ENV === "production" ? "https://api.npoint.io/fa60eac6049efb346099" : "http://localhost:8080/properties";

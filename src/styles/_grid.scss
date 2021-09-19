@@ -1,0 +1,105 @@
+/************* Variables *************/
+// Device sizes
+$small-device: 480px;
+$medium-device: 768px;
+$large-device: 992px;
+$x-large-device: 1200px;
+
+// The maximum number of columns you want for your grid system
+$max-column: 12;
+
+// Calculate the smallest and largest grid column widths
+$largest-column-width: 100%;
+$smallest-column-width: $largest-column-width / $max-column;
+
+/************* Grid System Mixin (Column Generator) *************/
+@mixin grid($size) {
+  @for $i from 1 through $max-column {
+    @if ($size == "none") {
+      .#{col}-#{$i} {
+        width: $smallest-column-width * $i;
+      }
+    } @else {
+      .#{col}-#{$size}-#{$i} {
+        width: $smallest-column-width * $i;
+      }
+    }
+  }
+}
+/************* Breakpoint Mixin *************/
+@mixin breakpoint($type, $breakpoint) {
+  @if ($breakpoint == "sm") {
+    @media only screen and (#{$type}-width: $small-device) {
+      @content;
+    }
+  }
+  @if ($breakpoint == "md") {
+    @media only screen and (#{$type}-width: $medium-device) {
+      @content;
+    }
+  }
+  @if ($breakpoint == "lg") {
+    @media only screen and (#{$type}-width: $large-device) {
+      @content;
+    }
+  }
+  @if ($breakpoint == "xl") {
+    @media only screen and (#{$type}-width: $x-large-device) {
+      @content;
+    }
+  }
+}
+/************* 2 type of container *************/
+.container {
+  padding: 0 15px;
+  margin: 0 auto;
+  width: 100%;
+  @include breakpoint(min, md) {
+    max-width: 720px;
+  }
+  @include breakpoint(min, lg) {
+    max-width: 960px;
+  }
+  @include breakpoint(min, xl) {
+    max-width: 1170px;
+  }
+  &-fluid {
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+}
+/************* Row *************/
+.row {
+  margin: 0 -15px;
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  [class^="col"] {
+    position: relative;
+    min-height: 1px;
+    padding: 0 15px;
+    float: left;
+  }
+}
+/************* Default column *************/
+@include grid(none);
+
+/************* XLarge Device column *************/
+@include breakpoint(min, xl) {
+  @include grid(xl);
+}
+/************* Large Device column *************/
+@include breakpoint(min, lg) {
+  @include grid(lg);
+}
+/************* Medium Device column *************/
+@include breakpoint(min, md) {
+  @include grid(md);
+}
+/************* Small Device column *************/
+@include breakpoint(min, sm) {
+  @include grid(sm);
+}
